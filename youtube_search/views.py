@@ -55,6 +55,7 @@ def __search_videos(search_terms):
     id_videos = []
 
     for entry in feed.entry:
-        regex_result = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
-        id_videos.append((entry.media.title.text, regex_result.group(1)))
+        if entry.GetSwfUrl():
+            regex_result = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
+            id_videos.append({'title':entry.media.title.text, 'id':regex_result.group(1)})
     return id_videos

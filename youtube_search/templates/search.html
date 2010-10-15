@@ -12,6 +12,12 @@
         </script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/VideoController.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/scripts.js"></script>
+        <script type="text/javascript">
+            {% for video in videos %}
+                {{ video.title }}
+                {{ video.id }}
+            {% endfor %}
+        </script>
     </head>
     <body>
         <div id="header">
