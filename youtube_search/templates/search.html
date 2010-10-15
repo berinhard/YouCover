@@ -5,6 +5,12 @@
         <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css" type="text/css" />
         <script type="text/javascript" src="{{MEDIA_URL}}js/prototype.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/scriptaculous.js"></script>
+        
+        <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+        <script type="text/javascript">
+          google.load("swfobject", "2.1");
+        </script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/VideoController.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/scripts.js"></script>
     </head>
     <body>
@@ -24,8 +30,10 @@
                 </form>
             </div>
         </div>
-        <div id="content">
-            
+        <div id="mainContainer">
+            <div id="mainContent">
+
+            </div>
         </div>
     </body>
 </html>
