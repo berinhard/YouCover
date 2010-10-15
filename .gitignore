@@ -2,3 +2,7 @@
 *.swp
 *.pyo
 *~
+bin
+lib
+include
+shared
