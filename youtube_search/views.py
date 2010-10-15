@@ -1,15 +1,15 @@
 # coding:utf-8
+from xml.dom import minidom
+import re
+import gdata.youtube
+import gdata.youtube.service
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
 from youtube_search.forms import SearchForm
-
-import gdata.youtube
-import gdata.youtube.service
-from xml.dom import minidom
-import re
+from config_constants import *
 
 
 def search(request):
@@ -22,24 +22,28 @@ def do_search(request):
 
     form = SearchForm(request.POST)
     if form.is_valid():
-        search_term = unicode(form.cleaned_data['full_text'] + ' cover')
-        context = RequestContext(request, {'videos':[]})
+        search_term = form.cleaned_data['full_text'] + ' cover'
+        results = __search_videos(search_term)
 
+        context = RequestContext(request, {'videos':results})
         return render_to_response('search.html', context)
+
     else:
         context = RequestContext(request, {'form': form})
 
         return render_to_response('search.html', context)
 
-def search_video(search_terms):
-
+def __search_videos(search_terms):
+    '''
+    Return a list of id videos found with the search_terms
+    '''
     yt_service = gdata.youtube.service.YouTubeService()
 
     # The YouTube API does not currently support HTTPS/SSL access.
     yt_service.ssl = False
 
-    yt_service.developer_key = 'AI39si68dTO_CHSQaYNalWbwLpFk3kGl14BsKeSrHNiC-n1FttkRBzpAHzkz77pKNdaZMa9s1lispwHXA1XSLJE8g8VgqI2X2Q'
-    yt_service.client_id = 'youcover'
+    yt_service.developer_key = DEVELOPER_KEY
+    yt_service.client_id = CLIENT_ID
 
     yt_service = gdata.youtube.service.YouTubeService()
     query = gdata.youtube.service.YouTubeVideoQuery()
@@ -48,8 +52,9 @@ def search_video(search_terms):
     query.racy = 'include'
     feed = yt_service.YouTubeQuery(query)
 
-    resultados = []
+    id_videos = []
+
     for entry in feed.entry:
-        m = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
-        resultados.append((entry.media.title.text, m.group(1)))
-    return resultados
+        regex_result = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
+        id_videos.append((entry.media.title.text, regex_result.group(1)))
+    return id_videos
