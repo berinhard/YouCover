@@ -29,7 +29,7 @@ def do_search(request):
 
         return render_to_response('search.html', context)
 
-def SearchVideo(search_terms):
+def search_video(search_terms):
 
     yt_service = gdata.youtube.service.YouTubeService()
 
@@ -49,7 +49,7 @@ def SearchVideo(search_terms):
     resultados = []
     for entry in feed.entry:
         m = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
-        resultados.append(m.group(1))
+        resultados.append((entry.media.title.text, m.group(1)))
     
     return resultados
 
