@@ -1,0 +1,12 @@
+body
+{
+    margin:0;
+}
+
+.main_logo
+{
+    width: 200px;
+    height: 100px;
+    background-color: red;
+}
+

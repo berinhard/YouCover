@@ -1,7 +1,10 @@
 # Django settings for YouCover project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -43,19 +46,20 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/media-admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'xq-!-#x&a_#$$%6ka5m-*s^bq4lwtmscal(^1#k^3!90#mjp0^'
