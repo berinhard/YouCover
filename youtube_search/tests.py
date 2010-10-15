@@ -12,8 +12,8 @@ class SearchTestCase(TestCase):
     def test_redirect_user_to_youtube_search_results(self):
         response = self.client.post(reverse('search'), {'full_text':'metallica'})
 
-        self.assertEqual(302, response.status_code)
-        self.assertTrue('metallica+cover' in response['Location'])
+        self.assertEqual(200, response.status_code)
+        self.assertTrue('videos' in response.context)
 
     def test_error_if_user_do_not_provide_full_text(self):
         response = self.client.post(reverse('search'), {'full_text':''})

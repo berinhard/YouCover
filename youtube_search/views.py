@@ -17,10 +17,11 @@ def do_search(request):
 
     form = SearchForm(request.POST)
     if form.is_valid():
-        youtube_url = search_url % (form.cleaned_data['full_text'] + '+cover')
-        return HttpResponseRedirect(youtube_url)
+        search_term = unicode(form.cleaned_data['full_text'] + ' cover')
+        context = RequestContext(request, {'videos':[]})
+
+        return render_to_response('search.html', context)
     else:
         context = RequestContext(request, {'form': form})
 
         return render_to_response('search.html', context)
-
