@@ -1,4 +1,18 @@
-YouCover
-<form method='POST' action='.'>
-    {{ form }}
-</form>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>YouCover</title>
+        <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css" type="text/css" />
+        <script type="text/javascript" src="{{MEDIA_URL}}js/prototype.js"></script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/scriptaculous.js"></script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/scripts.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="{{MEDIA_URL}}images/logo_medio.png" class="main_logo"></img>
+            <form method='POST' action='.'>
+                {{ form }}
+            </form>
+        </div>
+    </body>
+</html>
