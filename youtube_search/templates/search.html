@@ -9,10 +9,23 @@
     </head>
     <body>
         <div id="header">
-            <img src="{{MEDIA_URL}}images/logo_medio.png" class="main_logo"></img>
-            <form method='POST' action='.'>
-                {{ form }}
-            </form>
+            <div class="mainLogoContainer">
+                <img src="{{MEDIA_URL}}images/logo_medio.png" class="mainLogo"></img>
+            </div>
+            <div class="searchFormContainer searchForm">
+                <form method='POST' >
+                    <label for="id_full_text" class="searchFormLabel">{{ form.full_text.label }}</label>
+                    {{ form.full_text }}
+                    {% csrf_token %}
+                    {% if form.full_text.errors %}
+                    <span class="inline_warning">{{ form.full_text.errors }}</span>
+                    {% endif %}
+                    <input type="button" value="Enviar" class="searchFormSubmit" />
+                </form>
+            </div>
+        </div>
+        <div id="content">
+
         </div>
     </body>
 </html>

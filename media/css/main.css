@@ -3,10 +3,66 @@ body
     margin:0;
 }
 
-.main_logo
+.mainLogo
 {
-    width: 200px;
-    height: 100px;
     background-color: red;
 }
 
+.mainLogoContainer
+{
+    width: 200px;
+    float: left;
+}
+
+.searchFormContainer
+{
+    float: left;
+    position: relative;
+    top: 50px;
+    left: 30px;
+}
+
+.searchFormLabel
+{
+    float:left;
+    font-weight:bold;
+    position:relative;
+    top:4px;
+}
+
+#header
+{
+    width: 100%;
+    height: 100px;
+}
+
+.searchForm #id_full_text
+{
+    border:1px solid;
+    float:left;
+    height:26px;
+    margin: 0 0 0 10px;
+    padding:0 5px;
+    position:relative;
+    width:400px;
+}
+
+.searchForm .searchFormSubmit
+{
+    border:1px solid;
+    height:28px;
+    margin:0 0 0 10px;
+    width:90px;
+}
+
+.inline_warning
+{
+    background-color:#FFEDCC;
+    border:1px solid #DD5500;
+    display:block;
+    float:left;
+    height:23px;
+    margin: 0 0 0 10px;
+    padding:3px 5px 0;
+    position:relative;
+}

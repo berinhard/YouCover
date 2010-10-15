@@ -1,6 +1,9 @@
 #coding: utf-8
 from django.conf.urls.defaults import *
 
+from shortcuts import route
+from youtube_search.views import search, do_search
+
 urlpatterns = patterns('',
-    url(r'^$', 'youtube_search.views.search', name='search'),
+    route(r'^$', GET=search, POST=do_search, name='search'),
 )
