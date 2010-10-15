@@ -19,4 +19,8 @@ def do_search(request):
     if form.is_valid():
         youtube_url = search_url % (form.cleaned_data['full_text'] + '+cover')
         return HttpResponseRedirect(youtube_url)
+    else:
+        context = RequestContext(request, {'form': form})
+
+        return render_to_response('search.html', context)
 
