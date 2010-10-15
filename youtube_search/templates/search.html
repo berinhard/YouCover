@@ -1,4 +1,6 @@
 YouCover
 <form method='POST' action='.'>
     {{ form }}
+    {% csrf_token %}
+    <input type="submit" value="Search" />
 </form>
