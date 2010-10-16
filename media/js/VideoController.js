@@ -1,7 +1,7 @@
 var VideoController = Class.create({
 
-    
-    
+
+
     initialize : function()
     {
         this.params = {
@@ -30,7 +30,7 @@ var VideoController = Class.create({
     _createVideoHolder : function(videoInfo, container)
     {
         container = $(container);
-        
+
         var _videoSpan;
         var _videoHolder = new Element('span', { 'class' : 'videoHolder' }).insert(
             _videoSpan = new Element('span', { 'id' : ('video_' + videoInfo.id) })
