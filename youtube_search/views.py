@@ -25,7 +25,7 @@ def do_search(request):
         search_term = form.cleaned_data['full_text'] + ' cover'
         results = __search_videos(search_term)
 
-        context = RequestContext(request, {'videos':results})
+        context = RequestContext(request, {'videos':results, 'form':form})
         return render_to_response('search.html', context)
 
     else:
