@@ -49,12 +49,13 @@ def __search_videos(search_terms):
     query.vq = search_terms
     query.orderby = 'viewCount'
     query.racy = 'include'
+
     feed = yt_service.YouTubeQuery(query)
 
     id_videos = []
-
     for entry in feed.entry:
         if entry.GetSwfUrl():
             regex_result = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
             id_videos.append({'title':entry.media.title.text.strip(), 'id':regex_result.group(1)})
+
     return id_videos
