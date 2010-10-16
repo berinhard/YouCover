@@ -11,13 +11,6 @@
           google.load("swfobject", "2.1");
         </script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/VideoController.js"></script>
-        <script type="text/javascript" src="{{MEDIA_URL}}js/scripts.js"></script>
-        <script type="text/javascript">
-            {% for video in videos %}
-                {{ video.title }}
-                {{ video.id }}
-            {% endfor %}
-        </script>
     </head>
     <body>
         <div id="header">
@@ -41,5 +34,19 @@
 
             </div>
         </div>
+        <script type="text/javascript">
+            var videoArray = [];
+            {% for video in videos %}
+                videoArray.push({
+                    'id' : '{{ video.id }}',
+                    'nome' : '{{ video.title }}',
+                });
+            {% endfor %}
+            google.setOnLoadCallback(function() {
+                vController = new VideoController();
+
+                vController.loadVideos(videoArray, 'mainContent');
+            });
+        </script>
     </body>
 </html>
