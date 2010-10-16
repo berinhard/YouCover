@@ -22,7 +22,7 @@ def do_search(request):
 
     form = SearchForm(request.POST)
     if form.is_valid():
-        search_term = form.cleaned_data['full_text'] + ' cover'
+        search_term =  u'allintitle:%s cover' % form.cleaned_data['full_text']
         results = __search_videos(search_term)
 
         context = RequestContext(request, {'videos':results, 'form':form})
@@ -45,7 +45,6 @@ def __search_videos(search_terms):
     yt_service.developer_key = DEVELOPER_KEY
     yt_service.client_id = CLIENT_ID
 
-    yt_service = gdata.youtube.service.YouTubeService()
     query = gdata.youtube.service.YouTubeVideoQuery()
     query.vq = search_terms
     query.orderby = 'viewCount'
