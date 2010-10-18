@@ -1,11 +1,18 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <title>YouCover</title>
         <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css" type="text/css" />
         <script type="text/javascript" src="{{MEDIA_URL}}js/prototype.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/scriptaculous.js"></script>
-        <script type="text/javascript" src="{{MEDIA_URL}}js/scripts.js"></script>
+
+        <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+        <script type="text/javascript">
+          google.load("swfobject", "2.1");
+        </script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/VideoController.js"></script>
     </head>
     <body>
         <div id="header">
@@ -13,19 +20,35 @@
                 <img src="{{MEDIA_URL}}images/logo_medio.png" class="mainLogo"></img>
             </div>
             <div class="searchFormContainer searchForm">
-                <form method='POST' >
+                <form action="." method="post" >
+                    {% csrf_token %}
                     <label for="id_full_text" class="searchFormLabel">{{ form.full_text.label }}</label>
                     {{ form.full_text }}
-                    {% csrf_token %}
                     {% if form.full_text.errors %}
-                    <span class="inline_warning">{{ form.full_text.errors }}</span>
+                        <span class="inline_warning">{{ form.full_text.errors }}</span>
                     {% endif %}
-                    <input type="button" value="Enviar" class="searchFormSubmit" />
+                    <input type="submit" value="Covers" class="searchFormSubmit" />
                 </form>
             </div>
         </div>
-        <div id="content">
+        <div id="mainContainer">
+            <div id="mainContent">
 
+            </div>
         </div>
+        <script type="text/javascript">
+            var videoArray = [];
+            {% for video in videos %}
+                videoArray.push({
+                    'id' : '{{ video.id }}',
+                    'nome' : '{{ video.title }}',
+                });
+            {% endfor %}
+            google.setOnLoadCallback(function() {
+                vController = new VideoController();
+
+                vController.loadVideos(videoArray, 'mainContent');
+            });
+        </script>
     </body>
 </html>

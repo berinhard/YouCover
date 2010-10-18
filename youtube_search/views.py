@@ -22,10 +22,10 @@ def do_search(request):
 
     form = SearchForm(request.POST)
     if form.is_valid():
-        search_term = form.cleaned_data['full_text'] + ' cover'
+        search_term =  u'allintitle:%s cover' % form.cleaned_data['full_text']
         results = __search_videos(search_term)
 
-        context = RequestContext(request, {'videos':results})
+        context = RequestContext(request, {'videos':results, 'form':form})
         return render_to_response('search.html', context)
 
     else:
@@ -45,16 +45,18 @@ def __search_videos(search_terms):
     yt_service.developer_key = DEVELOPER_KEY
     yt_service.client_id = CLIENT_ID
 
-    yt_service = gdata.youtube.service.YouTubeService()
     query = gdata.youtube.service.YouTubeVideoQuery()
+    search_terms = search_terms.encode('utf-8')
     query.vq = search_terms
     query.orderby = 'viewCount'
     query.racy = 'include'
+
     feed = yt_service.YouTubeQuery(query)
 
     id_videos = []
-
     for entry in feed.entry:
-        regex_result = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
-        id_videos.append((entry.media.title.text, regex_result.group(1)))
+        if entry.GetSwfUrl():
+            regex_result = re.search('^.*v\/([^?]+)', entry.GetSwfUrl())
+            id_videos.append({'title':entry.media.title.text.strip(), 'id':regex_result.group(1)})
+
     return id_videos
