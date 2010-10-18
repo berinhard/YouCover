@@ -46,6 +46,7 @@ def __search_videos(search_terms):
     yt_service.client_id = CLIENT_ID
 
     query = gdata.youtube.service.YouTubeVideoQuery()
+    search_terms = search_terms.encode('utf-8')
     query.vq = search_terms
     query.orderby = 'viewCount'
     query.racy = 'include'
