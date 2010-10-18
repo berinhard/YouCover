@@ -20,14 +20,14 @@
                 <img src="{{MEDIA_URL}}images/logo_medio.png" class="mainLogo"></img>
             </div>
             <div class="searchFormContainer searchForm">
-                <form method='POST' >
+                <form action="." method="post" >
+                    {% csrf_token %}
                     <label for="id_full_text" class="searchFormLabel">{{ form.full_text.label }}</label>
                     {{ form.full_text }}
-                    {% csrf_token %}
                     {% if form.full_text.errors %}
-                    <span class="inline_warning">{{ form.full_text.errors }}</span>
+                        <span class="inline_warning">{{ form.full_text.errors }}</span>
                     {% endif %}
-                    <input type="button" value="Enviar" class="searchFormSubmit" />
+                    <input type="submit" value="Covers" class="searchFormSubmit" />
                 </form>
             </div>
         </div>
