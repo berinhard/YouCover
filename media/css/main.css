@@ -84,4 +84,6 @@ body
 #mainContainer .videoHolder .videoTitle
 {
     display: block;
+    height: 100px;
+    width: 240px;
 }
