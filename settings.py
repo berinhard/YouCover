@@ -94,4 +94,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'youtube_search',
+    'south',
 )
